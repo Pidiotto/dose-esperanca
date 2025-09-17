@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recados Especiais</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Partículas flutuantes */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.5; }
+        }
+
+        .login-container {
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            transform: scale(0.8);
+            animation: scaleIn 0.8s ease-out forwards;
+        }
+
+        @keyframes scaleIn {
+            to { transform: scale(1); }
+        }
+
+        .login-container h1 {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(255, 255, 255, 0.5); }
+            to { text-shadow: 0 0 30px rgba(255, 255, 255, 0.8); }
+        }
+
+        .login-container p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 16px 20px;
+            border: none;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .password-input:focus {
+            outline: none;
+            transform: scale(1.05);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(238, 90, 36, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(238, 90, 36, 0.6);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            margin-top: 15px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+
+        .error-message.show {
+            opacity: 1;
+        }
+
+        /* Página de recado */
+        .message-container {
+            display: none;
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            max-width: 600px;
+            width: 90%;
+            transform: scale(0);
+            animation: messageAppear 1s ease-out forwards;
+        }
+
+        @keyframes messageAppear {
+            0% { transform: scale(0) rotate(-10deg); opacity: 0; }
+            50% { transform: scale(1.1) rotate(5deg); opacity: 0.8; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        .message-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .message-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            animation: titlePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .message-subtitle {
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .message-content {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            font-size: 1.3rem;
+            line-height: 1.6;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .message-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .back-btn {
+            display: block;
+            margin: 0 auto;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(245, 87, 108, 0.4);
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(245, 87, 108, 0.6);
+        }
+
+        /* Corações flutuantes */
+        .heart {
+            position: absolute;
+            color: #ff6b6b;
+            font-size: 20px;
+            animation: heartFloat 4s infinite ease-in-out;
+            opacity: 0;
+        }
+
+        @keyframes heartFloat {
+            0% { 
+                opacity: 0;
+                transform: translateY(0) scale(0);
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(-10px) scale(1);
+            }
+            90% {
+                opacity: 1;
+                transform: translateY(-100px) scale(1.5);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-120px) scale(0);
+            }
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .login-container, .message-container {
+                padding: 30px;
+                margin: 20px;
+            }
+            
+            .message-title {
+                font-size: 2rem;
+            }
+            
+            .message-content {
+                font-size: 1.1rem;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Partículas flutuantes -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Página de Login -->
+    <div class="login-container" id="loginContainer">
+        <h1>✨ Recado Especial</h1>
+        <p>Digite a senha secreta para ver sua mensagem!</p>
+        <input type="password" class="password-input" id="passwordInput" placeholder="Digite a senha...">
+        <button class="login-btn" id="loginBtn">Revelar Mensagem 🎁</button>
+        <div class="error-message" id="errorMessage">Senha incorreta! Tente novamente 😊</div>
+    </div>
+
+    <!-- Página de Mensagem -->
+    <div class="message-container" id="messageContainer">
+        <div class="message-header">
+            <div class="message-title" id="messageTitle">Sua Mensagem Especial</div>
+            <div class="message-subtitle" id="messageSubtitle">Para você com carinho ❤️</div>
+        </div>
+        <div class="message-content" id="messageContent">
+            Sua mensagem aparecerá aqui...
+        </div>
+        <button class="back-btn" id="backBtn">Voltar ao início</button>
+    </div>
+
+    <script>
+        // Configuração das mensagens - EDITE AQUI SUAS MENSAGENS
+        const messages = {
+            'ana123': {
+                title: 'Para Ana 💖',
+                subtitle: 'Uma mensagem especial para você!',
+                content: 'Olá Ana! Você é uma pessoa incrível e ilumina nosso ambiente de trabalho todos os dias. Continue sendo essa pessoa maravilhosa! 🌟✨'
+            },
+            'carlos2024': {
+                title: 'Hey Carlos! 🚀',
+                subtitle: 'Você é demais!',
+                content: 'Carlos, seu senso de humor e dedicação fazem toda a diferença na equipe. Obrigado por tornar os dias mais leves e produtivos! 😄🎉'
+            },
+            'maria456': {
+                title: 'Querida Maria 🌸',
+                subtitle: 'Com muito carinho...',
+                content: 'Maria, sua gentileza e profissionalismo são inspiradores. É um prazer trabalhar ao seu lado. Continue sendo essa pessoa especial! 🌺💕'
+            },
+            'joao789': {
+                title: 'Oi João! ⚡',
+                subtitle: 'Uma surpresa para você!',
+                content: 'João, sua criatividade e energia contagiante fazem de você uma peça fundamental da nossa equipe. Parabéns por ser tão incrível! 🎯🔥'
+            },
+            'teste': {
+                title: 'Mensagem de Teste 🧪',
+                subtitle: 'Testando o sistema...',
+                content: 'Se você está vendo esta mensagem, o sistema está funcionando perfeitamente! Agora você pode personalizar as mensagens no código. 🎈🎊'
+            }
+        };
+
+        // Elementos DOM
+        const loginContainer = document.getElementById('loginContainer');
+        const messageContainer = document.getElementById('messageContainer');
+        const passwordInput = document.getElementById('passwordInput');
+        const loginBtn = document.getElementById('loginBtn');
+        const errorMessage = document.getElementById('errorMessage');
+        const messageTitle = document.getElementById('messageTitle');
+        const messageSubtitle = document.getElementById('messageSubtitle');
+        const messageContent = document.getElementById('messageContent');
+        const backBtn = document.getElementById('backBtn');
+
+        // Criar partículas flutuantes
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Função de login
+        function login() {
+            const password = passwordInput.value.trim();
+            
+            if (messages[password]) {
+                // Sucesso - mostrar mensagem
+                const msg = messages[password];
+                messageTitle.textContent = msg.title;
+                messageSubtitle.textContent = msg.subtitle;
+                messageContent.textContent = msg.content;
+                
+                loginContainer.style.display = 'none';
+                messageContainer.style.display = 'block';
+                
+                // Criar corações flutuantes
+                createHearts();
+                
+                // Resetar campo de senha
+                passwordInput.value = '';
+                errorMessage.classList.remove('show');
+            } else {
+                // Erro - senha incorreta
+                errorMessage.classList.add('show');
+                passwordInput.style.animation = 'none';
+                passwordInput.offsetHeight; // Trigger reflow
+                passwordInput.style.animation = 'shake 0.5s ease-in-out';
+                
+                setTimeout(() => {
+                    errorMessage.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        // Função para criar corações flutuantes
+        function createHearts() {
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.innerHTML = '❤️';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.top = '100%';
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        document.body.removeChild(heart);
+                    }, 4000);
+                }, i * 200);
+            }
+        }
+
+        // Event listeners
+        loginBtn.addEventListener('click', login);
+        passwordInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                login();
+            }
+        });
+
+        backBtn.addEventListener('click', () => {
+            loginContainer.style.display = 'block';
+            messageContainer.style.display = 'none';
+        });
+
+        // Adicionar animação de shake para erro
+        const shakeKeyframes = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-10px); }
+                75% { transform: translateX(10px); }
+            }
+        `;
+        const style = document.createElement('style');
+        style.textContent = shakeKeyframes;
+        document.head.appendChild(style);
+
+        // Inicializar
+        createParticles();
+        passwordInput.focus();
+    </script>
+</body>
+</html>
