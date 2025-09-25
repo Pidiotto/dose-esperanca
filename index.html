@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,13 +22,22 @@
             align-items: center;
             justify-content: center;
             overflow-x: hidden;
-            padding: 20px; /* Adiciona um padding geral para evitar que o conteúdo encoste nas bordas */
+            padding: 20px;
+            /* Adiciona um padding geral para evitar que o conteúdo encoste nas bordas */
         }
 
         @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         .particles {
@@ -50,39 +60,47 @@
         }
 
         @keyframes float {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0px) rotate(0deg);
                 opacity: 1;
             }
+
             50% {
                 transform: translateY(-20px) rotate(180deg);
                 opacity: 0.5;
             }
         }
 
-        .login-container, .message-container {
+        .login-container {
             position: relative;
             z-index: 10;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(20px);
             border-radius: 24px;
-            padding: 30px; /* Padding reduzido para telas menores */
+            padding: 30px;
+            /* Padding reduzido para telas menores */
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.2);
             text-align: center;
             max-width: 400px;
-            width: 100%; /* Ocupa 100% da largura do contêiner pai, que tem um max-width */
+            width: 100%;
+            /* Ocupa 100% da largura do contêiner pai, que tem um max-width */
             transform: scale(0.8);
             animation: scaleIn 0.8s ease-out forwards;
         }
 
         @keyframes scaleIn {
-            to { transform: scale(1); }
+            to {
+                transform: scale(1);
+            }
         }
 
         .login-container h1 {
             color: white;
-            font-size: 1.8rem; /* Fonte um pouco menor para celular */
+            font-size: 1.8rem;
+            /* Fonte um pouco menor para celular */
             font-weight: 700;
             margin-bottom: 8px;
             text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
@@ -90,24 +108,33 @@
         }
 
         @keyframes glow {
-            from { text-shadow: 0 0 20px rgba(255, 255, 255, 0.5); }
-            to { text-shadow: 0 0 30px rgba(255, 255, 255, 0.8); }
+            from {
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            }
+
+            to {
+                text-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+            }
         }
 
         .login-container p {
             color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 25px; /* Margem reduzida */
-            font-size: 1rem; /* Fonte um pouco menor */
+            margin-bottom: 25px;
+            /* Margem reduzida */
+            font-size: 1rem;
+            /* Fonte um pouco menor */
         }
 
         .password-input {
             width: 100%;
-            padding: 14px 18px; /* Padding ajustado */
+            padding: 14px 18px;
+            /* Padding ajustado */
             border: none;
             border-radius: 50px;
             background: rgba(255, 255, 255, 0.9);
             font-size: 1rem;
-            margin-bottom: 15px; /* Margem reduzida */
+            margin-bottom: 15px;
+            /* Margem reduzida */
             text-align: center;
             transition: all 0.3s ease;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
@@ -115,13 +142,15 @@
 
         .password-input:focus {
             outline: none;
-            transform: scale(1.03); /* Escala menor para não "quebrar" o layout */
+            transform: scale(1.03);
+            /* Escala menor para não "quebrar" o layout */
             box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
         }
 
         .login-btn {
             width: 100%;
-            padding: 14px; /* Padding ajustado */
+            padding: 14px;
+            /* Padding ajustado */
             background: linear-gradient(45deg, #ff6b6b, #ee5a24);
             color: white;
             border: none;
@@ -150,7 +179,8 @@
             opacity: 0;
             transition: opacity 0.3s ease;
             background: rgba(255, 255, 255, 0.9);
-            padding: 8px; /* Padding ajustado */
+            padding: 8px;
+            /* Padding ajustado */
             border-radius: 10px;
             font-weight: 500;
             font-size: 0.9rem;
@@ -169,13 +199,26 @@
         }
 
         @keyframes messageAppear {
-            0% { transform: scale(0) rotate(-10deg); opacity: 0; }
-            50% { transform: scale(1.05) rotate(2deg); opacity: 0.9; } /* Ajuste no "salto" da animação */
-            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+            0% {
+                transform: scale(0) rotate(-10deg);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.05) rotate(2deg);
+                opacity: 0.9;
+            }
+
+            /* Ajuste no "salto" da animação */
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
         }
 
         .message-title {
-            font-size: 2rem; /* Fonte menor */
+            font-size: 2rem;
+            /* Fonte menor */
             font-weight: 800;
             background: linear-gradient(45deg, #667eea, #764ba2);
             -webkit-background-clip: text;
@@ -186,22 +229,34 @@
         }
 
         @keyframes titlePulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); } /* Pulso mais sutil */
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.02);
+            }
+
+            /* Pulso mais sutil */
         }
 
         .message-subtitle {
             color: #666;
-            font-size: 1.1rem; /* Fonte menor */
+            font-size: 1.1rem;
+            /* Fonte menor */
             margin-bottom: 15px;
         }
 
         .message-content {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            padding: 20px; /* Padding reduzido */
+            padding: 20px;
+            /* Padding reduzido */
             border-radius: 20px;
-            font-size: 1.1rem; /* Fonte menor */
+            font-size: 1.1rem;
+            /* Fonte menor */
             line-height: 1.5;
             text-align: center;
             box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
@@ -223,8 +278,13 @@
         }
 
         @keyframes shimmer {
-            0% { transform: translateX(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) rotate(45deg); }
+            0% {
+                transform: translateX(-100%) rotate(45deg);
+            }
+
+            100% {
+                transform: translateX(100%) rotate(45deg);
+            }
         }
 
         .back-btn {
@@ -255,42 +315,74 @@
             opacity: 0;
         }
 
-        .letter-paper {
+        .letter-paper1 {
             position: relative;
             background: url('./img/horror_paper.png') no-repeat center/contain;
             width: 100%;
-            min-height: 400px; /* Altura ajustada para telas menores */
+            min-height: 400px;
+            /* Altura ajustada para telas menores */
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
-            box-sizing: border-box; /* Garante que o padding seja incluído no tamanho */
+            box-sizing: border-box;
+            /* Garante que o padding seja incluído no tamanho */
+        }
+
+        .letter-paper2 {
+            position: relative;
+            background: url('./img/cat_paper.png') no-repeat center/contain;
+            width: 100%;
+            min-height: 400px;
+            /* Altura ajustada para telas menores */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+            /* Garante que o padding seja incluído no tamanho */
         }
 
         .letter-paper p {
             position: relative;
-            font-size: 1rem; /* Fonte menor para caber na imagem */
+            font-size: 1rem;
+            /* Fonte menor para caber na imagem */
             line-height: 1.5;
             color: #000;
-            max-width: 80%;
+            max-width: 100%;
             text-align: center;
-            background: rgba(255, 255, 255, 0.7);
-            padding: 10px 15px; /* Padding reduzido */
+            padding: 10px 15px;
+            /* Padding reduzido */
             border-radius: 12px;
         }
 
 
         @keyframes heartFloat {
-            0% { opacity: 0; transform: translateY(0) scale(0); }
-            10% { opacity: 1; transform: translateY(-10px) scale(1); }
-            90% { opacity: 1; transform: translateY(-100px) scale(1.5); }
-            100% { opacity: 0; transform: translateY(-120px) scale(0); }
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(0);
+            }
+
+            10% {
+                opacity: 1;
+                transform: translateY(-10px) scale(1);
+            }
+
+            90% {
+                opacity: 1;
+                transform: translateY(-100px) scale(1.5);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-120px) scale(0);
+            }
         }
 
         /* Removido o media query duplicado, os ajustes já foram feitos acima */
-
     </style>
 </head>
+
 <body>
     <div class="particles" id="particles"></div>
 
@@ -317,25 +409,17 @@
         // Configuração das mensagens - EDITE AQUI SUAS MENSAGENS
         const messages = {
             'laura1': {
-                title: 'Para Ana 💖',
-                content: 'Olá Ana! Você é uma pessoa incrível e ilumina nosso ambiente de trabalho todos os dias. Continue sendo essa pessoa maravilhosa! 🌟✨'
+                title: ' ',
+                content: ''
             },
-            'carlos2024': {
-                title: 'Hey Carlos! 🚀',
-                content: 'Carlos, seu senso de humor e dedicação fazem toda a diferença na equipe. Obrigado por tornar os dias mais leves e produtivos! 😄🎉'
+            'valdo': {
+                title: '',
+                content: 'Valeu pai por todo o esforço, te admiro muito!'
             },
-            'maria456': {
-                title: 'Querida Maria 🌸',
-                content: 'Maria, sua gentileza e profissionalismo são inspiradores. É um prazer trabalhar ao seu lado. Continue sendo essa pessoa especial! 🌺💕'
+            'maico1': {
+                title: '',
+                content: ''
             },
-            'joao789': {
-                title: 'Oi João! ⚡',
-                content: 'João, sua criatividade e energia contagiante fazem de você uma peça fundamental da nossa equipe. Parabéns por ser tão incrível! 🎯🔥'
-            },
-            'teste': {
-                title: 'Mensagem de Teste ',
-                content: 'Se você está vendo esta mensagem, o sistema está funcionando perfeitamente! Agora você pode personalizar as mensagens no código. 🎈🎊'
-            }
         };
 
         // Elementos DOM
@@ -374,7 +458,13 @@
 
                 if (password === "laura1") {
                     messageContent.innerHTML = `
-                        <div class="letter-paper">
+                        <div class="letter-paper1">
+                            <p>${msg.content}</p>
+                        </div>
+                    `;
+                } else if (password === "maico1") {
+                    messageContent.innerHTML = `
+                        <div class="letter-paper2">
                             <p>${msg.content}</p>
                         </div>
                     `;
@@ -447,4 +537,5 @@
         passwordInput.focus();
     </script>
 </body>
+
 </html>
