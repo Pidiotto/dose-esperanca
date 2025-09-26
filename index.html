@@ -343,6 +343,20 @@
             /* Garante que o padding seja incluído no tamanho */
         }
 
+        .letter-paper3 {
+            position: relative;
+            background: url('./img/maressa.png') no-repeat center/contain;
+            width: 100%;
+            min-height: 400px;
+            /* Altura ajustada para telas menores */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+            /* Garante que o padding seja incluído no tamanho */
+        }
+
         .letter-paper p {
             position: relative;
             font-size: 1rem;
@@ -420,6 +434,10 @@
                 title: '',
                 content: ''
             },
+            'maressa1': {
+                title: '',
+                content: ''
+            }
         };
 
         // Elementos DOM
@@ -465,6 +483,12 @@
                 } else if (password === "maico1") {
                     messageContent.innerHTML = `
                         <div class="letter-paper2">
+                            <p>${msg.content}</p>
+                        </div>
+                    `;
+                } else if (password === "maressa1") {
+                    messageContent.innerHTML = `
+                        <div class="letter-paper3">
                             <p>${msg.content}</p>
                         </div>
                     `;
