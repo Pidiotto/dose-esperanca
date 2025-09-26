@@ -357,6 +357,20 @@
             /* Garante que o padding seja incluído no tamanho */
         }
 
+        .letter-paper4 {
+            position: relative;
+            background: url('./img/pandinha.png') no-repeat center/contain;
+            width: 100%;
+            min-height: 400px;
+            /* Altura ajustada para telas menores */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+            /* Garante que o padding seja incluído no tamanho */
+        }
+
         .letter-paper p {
             position: relative;
             font-size: 1rem;
@@ -437,6 +451,10 @@
             'maressa1': {
                 title: '',
                 content: ''
+            },
+            'pandinha': {
+                title: '',
+                content: ''
             }
         };
 
@@ -492,7 +510,14 @@
                             <p>${msg.content}</p>
                         </div>
                     `;
-                } else {
+                } else if (password === "pandinha") {
+                    messageContent.innerHTML = `
+                        <div class="letter-paper4">
+                            <p>${msg.content}</p>
+                        </div>
+                    `;
+                }
+                else {
                     messageContent.textContent = msg.content;
                 }
 
